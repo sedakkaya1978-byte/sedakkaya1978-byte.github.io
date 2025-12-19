@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seda Akkaya | Personal Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --ana-renk: #1a1a1a;
+            --ozel-renk: #d4af37;
+            --arka-renk: #f9f9f9;
+            --yazi-koyu: #222;
+            --beyaz: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--yazi-koyu);
+            background-color: var(--arka-renk);
+            overflow-x: hidden;
+        }
+
+        .kutu {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-weight: 700;
+            color: var(--ana-renk);
+        }
+
+        section {
+            padding: 50px;
+            background-color: var(--beyaz);
+            margin-bottom: 30px;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .baslik-stili {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--ana-renk);
+            border-bottom: 2px solid var(--ozel-renk);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        @keyframes yukariCik {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 40px, 0);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+
+        @keyframes dalgalan {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .animasyonlu {
+            opacity: 0;
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
+        }
+
+        .animasyonlu.gorunur {
+            opacity: 1;
+            animation: yukariCik 0.8s ease-out forwards;
+        }
+
+        .gecikme-1 {
+            animation-delay: 0.1s;
+        }
+
+        .gecikme-2 {
+            animation-delay: 0.2s;
+        }
+
+        .gecikme-3 {
+            animation-delay: 0.3s;
+        }
+
+
+        #giris {
+            text-align: center;
+            padding: 120px 20px;
+
+            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('arkaplan.jpg');
+
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--beyaz);
+            margin-bottom: 0;
+        }
+
+        .profil-resmi {
+            width: 140px;
+            height: 140px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            margin: 0 auto 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid var(--beyaz);
+            backdrop-filter: blur(5px);
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+        }
+
+        .profil-resmi:hover {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+
+        .profil-resmi i {
+            font-size: 70px;
+            color: var(--beyaz);
+        }
+
+        #giris h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            color: var(--beyaz);
+            letter-spacing: 2px;
+        }
+
+        #giris h2 {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-bottom: 40px;
+            color: #ddd;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .buton {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: transparent;
+            color: var(--beyaz);
+            text-decoration: none;
+            border: 2px solid var(--beyaz);
+            border-radius: 0;
+            font-weight: bold;
+            transition: 0.3s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .buton:hover {
+            background-color: var(--beyaz);
+            color: #000;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .buton-koyu {
+            color: var(--ana-renk);
+            border-color: var(--ana-renk);
+            margin: 0 10px;
+        }
+
+        .buton-koyu:hover {
+            background-color: var(--ana-renk);
+            color: var(--beyaz);
+        }
+
+        .icerik-kutusu {
+            margin-top: -50px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .icerik-izgara {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        @media(min-width: 768px) {
+            .icerik-izgara {
+                grid-template-columns: 2fr 1fr;
+            }
+        }
+
+        .hakkimda-yazisi p {
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+            color: #555;
+        }
+
+        .bilgi-kutusu h3 {
+            margin-bottom: 20px;
+            color: var(--ana-renk);
+            font-size: 1.2rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .bilgi-kutusu ul {
+            list-style: none;
+        }
+
+        .bilgi-kutusu li {
+            margin-bottom: 15px;
+            padding-left: 30px;
+            position: relative;
+            font-size: 0.95rem;
+            transition: transform 0.3s ease, color 0.3s ease;
+        }
+
+        .bilgi-kutusu li a {
+            text-decoration: none;
+            color: var(--ozel-renk);
+            font-weight: bold;
+            display: block;
+        }
+
+        .bilgi-kutusu li:hover {
+            transform: translateX(5px);
+            color: var(--ana-renk);
+        }
+
+        .bilgi-kutusu li i {
+            position: absolute;
+            left: 0;
+            top: 4px;
+            color: var(--ana-renk);
+        }
+
+        footer {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: #111;
+            color: #888;
+        }
+
+        footer h2 {
+            color: var(--beyaz);
+            margin-bottom: 15px;
+        }
+
+        .linkedin-butonu {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--beyaz);
+            color: #111;
+            padding: 12px 30px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1rem;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .linkedin-butonu:hover {
+            background-color: var(--ozel-renk);
+            color: var(--beyaz);
+        }
+    </style>
+</head>
+
+<body>
+
+    <header id="giris">
+        <div class="kutu">
+            <div class="profil-resmi animasyonlu">
+                <i class="fas fa-user"></i>
+            </div>
+            <h1 class="animasyonlu gecikme-1">SEDA AKKAYA</h1>
+            <h2 class="animasyonlu gecikme-2">International Relations Student | Business Minor</h2>
+            <a href="#iletisim" class="buton animasyonlu gecikme-3">Connect With Me</a>
+        </div>
+    </header>
+
+    <div class="kutu icerik-kutusu">
+        <div class="icerik-izgara">
+
+            <section id="hakkinda" class="animasyonlu">
+                <div style="text-align: center;">
+                    <h2 class="baslik-stili">About Me</h2>
+                </div>
+                <div class="hakkimda-yazisi">
+                    <p>Hello, I am Seda. I am a 2nd-year undergraduate student combining a major in International
+                        Relations with a minor in Business Administration (General Management).</p>
+
+                    <p>I was born in January 3rd, 2005 in İzmir and graduated from Keçiören Science High School. My
+                        favorite movie trilogy is “How to Train Your Dragon” which you can see one scenery from it at
+                        the top.</p>
+
+                    <p>I would like to play piano and read books in my free time. “One Hundred Years of Solitude” is my
+                        favorite book of all time. I am also part of <a href="https://ir.metu.edu.tr/"
+                            target="_blank">METU</a> fencing team.</p>
+
+                    <p>I believe in the power of discipline and continuous improvement. I am an avid sports enthusiast
+                        with a dedicated goal: to one day cross the finish line of an Ironman triathlon race.</p>
+
+                    <div style="text-align: center; margin-top: 30px;">
+                        <a href="eskrim.html" class="buton buton-koyu">Fencing</a>
+                        <a href="yuzme.html" class="buton buton-koyu">Swimming</a>
+                        <a href="kosu.html" class="buton buton-koyu">Running</a>
+                    </div>
+                </div>
+            </section>
+
+            <div class="yan-taraf">
+                <section class="bilgi-kutusu animasyonlu gecikme-2">
+                    <h3><i class="fas fa-graduation-cap"></i> Education</h3>
+                    <ul>
+                        <li>
+                            <strong>Bachelor of Arts in International Relations</strong><br>
+                            2nd Year Student
+                        </li>
+                        <li>
+                            <strong>Minor Program</strong><br>
+                            Business Administration (General Management)
+                        </li>
+                        <li>
+                            <strong>Keçiören Science High School</strong><br>
+                            High School Diploma
+                        </li>
+                    </ul>
+
+                    <h3><i class="fas fa-dumbbell"></i> Passions</h3>
+                    <ul>
+                        <li><a href="yuzme.html"><i class="fas fa-swimmer"></i> Swimming</a></li>
+                        <li><a href="kosu.html"><i class="fas fa-running"></i> Running</a></li>
+                        <li><a href="eskrim.html"><i class="fas fa-mask"></i> Fencing</a></li>
+                        <li><i class="fas fa-medal"></i> Ironman Goal</li>
+                        <li><i class="fas fa-music"></i> Piano</li>
+                    </ul>
+
+                    <h3><i class="fas fa-globe"></i> Languages</h3>
+                    <ul>
+                        <li><i class="fas fa-check"></i> Turkish (Native)</li>
+                        <li><i class="fas fa-check"></i> English (Fluent)</li>
+                        <li><i class="fas fa-check"></i> French (Beginner)</li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <footer id="iletisim" class="animasyonlu">
+        <div class="kutu">
+            <h2>Let's Connect</h2>
+            <p>Feel free to reach out via LinkedIn.</p>
+            <a href="https://www.linkedin.com/in/seda-akkaya-2643312a8" target="_blank" class="linkedin-butonu">
+                <i class="fab fa-linkedin"></i> LinkedIn Profile
+            </a>
+            <p style="margin-top: 40px; font-size: 0.8rem;">© 2025 Seda Akkaya</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const gozlemAyarlari = {
+                threshold: 0.1,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const gozlemci = new IntersectionObserver((girisler) => {
+                girisler.forEach(giris => {
+                    if (giris.isIntersecting) {
+                        giris.target.classList.add('gorunur');
+                        gozlemci.unobserve(giris.target);
+                    }
+                });
+            }, gozlemAyarlari);
+
+            const animasyonluElemanlar = document.querySelectorAll('.animasyonlu');
+            animasyonluElemanlar.forEach(el => gozlemci.observe(el));
+        });
+    </script>
+
+</body>
+
+</html>

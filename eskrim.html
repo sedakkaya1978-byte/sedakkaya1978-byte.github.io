@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seda Akkaya | Fencing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        <style> :root {
+            --ana-renk: #1a1a1a;
+            --ozel-renk: #d4af37;
+            --arka-renk: #f9f9f9;
+            --yazi-koyu: #222;
+            --beyaz: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            color: var(--yazi-koyu);
+            background-color: var(--arka-renk);
+            overflow-x: hidden;
+        }
+
+        .kutu {
+            width: 90%;
+            max-width: 1100px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .geri-don {
+            display: inline-block;
+            margin: 20px 0;
+            text-decoration: none;
+            color: var(--ana-renk);
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .geri-don:hover {
+            color: var(--ozel-renk);
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--ana-renk);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 2px solid var(--ozel-renk);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .galeri-kutusu {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto 40px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            background: #000;
+        }
+
+        .galeri-resmi {
+            display: none;
+            width: 100%;
+            height: 500px;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .galeri-resmi.aktif {
+            display: block;
+            animation: dalgalan 0.5s ease-in-out;
+        }
+
+        @keyframes dalgalan {
+            from {
+                opacity: 0.4;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        .geri,
+        .ileri {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: white;
+            font-weight: bold;
+            font-size: 24px;
+            transition: 0.6s ease;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0, 0, 0, 0.3);
+            text-decoration: none;
+        }
+
+        .ileri {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .geri {
+            left: 0;
+            border-radius: 3px 0 0 3px;
+        }
+
+        .geri:hover,
+        .ileri:hover {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .aciklama-yazisi {
+            max-width: 800px;
+            margin: 0 auto;
+            background: var(--beyaz);
+            padding: 40px;
+            border-radius: 4px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            font-size: 1.1rem;
+        }
+
+        .alt-yazi {
+            text-align: center;
+            padding: 10px;
+            color: #666;
+            font-style: italic;
+        }
+
+        @media (max-width: 768px) {
+            .galeri-resmi {
+                height: 300px;
+            }
+
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="kutu">
+        <a href="index.html" class="geri-don"><i class="fas fa-arrow-left"></i> Back to Home</a>
+
+        <header>
+            <h1>Fencing</h1>
+        </header>
+
+        <div class="galeri-kutusu">
+            <img class="galeri-resmi aktif" src="1.jpeg" alt="Fencing photo 1">
+            <img class="galeri-resmi" src="2.jpeg" alt="Fencing photo 2">
+            <img class="galeri-resmi" src="3.jpeg" alt="Fencing photo 3">
+            <img class="galeri-resmi" src="4.jpeg" alt="Fencing photo 4">
+            <img class="galeri-resmi" src="5.jpeg" alt="Fencing photo 5">
+
+            <a class="geri" onclick="resimDegis(-1)">&#10094;</a>
+            <a class="ileri" onclick="resimDegis(1)">&#10095;</a>
+        </div>
+
+        <div class="alt-yazi" id="alt-yazi">Image 1 of 5</div>
+
+        <section class="aciklama-yazisi">
+            <p>Fencing is more than just a sport to me; it is a discipline of mind and body. I have been fencing for
+                several years, honing my reflexes and strategic thinking. Being part of the METU fencing team has
+                allowed me to compete, learn from teammates, and push my physical limits.</p>
+            <br>
+            <p>Every match is a new puzzle, requiring focus, agility, and split-second decision making. It has taught me
+                resilience—how to recover quickly from a lost point and stay focused on the next touch.</p>
+        </section>
+    </div>
+
+    <script>
+        let resimNo = 1;
+        resimGoster(resimNo);
+
+        function resimDegis(n) {
+            resimGoster(resimNo += n);
+        }
+
+        function resimGoster(n) {
+            let i;
+            let resimler = document.getElementsByClassName("galeri-resmi");
+            let yazi = document.getElementById("alt-yazi");
+
+            if (n > resimler.length) { resimNo = 1 }
+            if (n < 1) { resimNo = resimler.length }
+
+            for (i = 0; i < resimler.length; i++) {
+                resimler[i].style.display = "none";
+                resimler[i].className = resimler[i].className.replace(" aktif", "");
+            }
+
+            resimler[resimNo - 1].style.display = "block";
+            resimler[resimNo - 1].className += " aktif";
+            yazi.innerText = `Image ${resimNo} of ${resimler.length}`;
+        }
+    </script>
+
+</body>
+
+</html>
